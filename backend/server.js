@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios')
 const cors=require('cors');
 const app = express();
+const dotenv = require('dotenv')
 app.use(cors())
 app.use(express.json());var router = express.Router();
 require("es6-promise").polyfill()
@@ -19,8 +20,8 @@ app.get('/',async function ( req, res) {
 
 app.post(`/getGoogleCaptcha`,async function ( req, res) {
   try{
-
-const RECAPTCHA_SERVER_KEY = '6Ld-AjUbAAAAAOoizOzKTwZncEud68Z4AO6zBxKZ'
+    dotenv.config();
+const RECAPTCHA_SERVER_KEY = ${SECRET_KEY}
 
 const humanKey = req.body.token
     const isHuman = await fetch(`https://www.google.com/recaptcha/api/siteverify`, {
